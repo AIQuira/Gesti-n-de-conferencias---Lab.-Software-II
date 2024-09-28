@@ -52,4 +52,13 @@ public class ConferenceTest {
         
         assertTrue(resultado>0, "La lista se creo Exitosamente");
     }
+    
+    @Test
+    public void testConferenceForName (){
+        Conference conferencia = new Conference("Energia Nuclear", "Ciencia", "UNO", "USA", "ACTIVO", "MAYAMI", "EJEMPLO", "11-11-2025", "11-11-2026", "11-10-2025", "11-10-2025", 2, 1, 1);
+        conferenceService.almacenarConferencia(conferencia);
+        int resultado = conferenceService.search("Energia").size();
+        
+        assertTrue(resultado>0, "La lista se creo Exitosamente");
+    }
 }
