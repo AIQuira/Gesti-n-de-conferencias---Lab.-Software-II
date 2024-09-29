@@ -5,7 +5,7 @@ package co.edu.unicauca.microkernel.plugins.mkPlugin;
  *
  * @author thali
  */
-import co.edu.unicauca.microkernel.mkCommon.interfaces.ISendEmail;
+import co.edu.unicauca.microkernel.common.interfaces.ISendEmail;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
