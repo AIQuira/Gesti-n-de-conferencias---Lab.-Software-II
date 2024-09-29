@@ -1,23 +1,23 @@
 package co.edu.unicauca.mvc.accesoADatos;
 
+import co.edu.unicauca.mvc.modelos.Articulo;
 import java.util.ArrayList;
 import java.util.List;
 import co.edu.unicauca.mvc.modelos.Conferencia;
+import co.edu.unicauca.mvc.modelos.Revisor;
 
-
-public class RepositorioConferenciaMemoriaArrayList implements InterfaceRepositorioConferencia{
+public class RepositorioConferenciaMemoriaArrayList implements InterfaceRepositorioConferencia {
 
     private ArrayList<Conferencia> listaConferencias;
-    
-    public RepositorioConferenciaMemoriaArrayList()
-    {
-        this.listaConferencias= new ArrayList();
+
+    public RepositorioConferenciaMemoriaArrayList() {
+        this.listaConferencias = new ArrayList();
     }
-    
+
     @Override
     public boolean almacenarConferencia(Conferencia objConfererencia) {
         objConfererencia.setIdConferencia(this.getCantidadConferencias());
-        boolean bandera=this.listaConferencias.add(objConfererencia);
+        boolean bandera = this.listaConferencias.add(objConfererencia);
         return bandera;
     }
 
@@ -25,12 +25,9 @@ public class RepositorioConferenciaMemoriaArrayList implements InterfaceReposito
     public List<Conferencia> listarConferencias() {
         return this.listaConferencias;
     }
-    
-    private int getCantidadConferencias()
-    {
-        return this.listaConferencias.size()+1;
+
+    private int getCantidadConferencias() {
+        return this.listaConferencias.size() + 1;
     }
-    
-    
-    
+
 }
