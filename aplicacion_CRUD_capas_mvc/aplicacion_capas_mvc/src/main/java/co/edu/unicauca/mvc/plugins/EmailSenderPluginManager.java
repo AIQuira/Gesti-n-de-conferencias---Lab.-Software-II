@@ -2,7 +2,7 @@
 package co.edu.unicauca.mvc.plugins;
 
 
-import co.edu.unicauca.microkernel.mkCommon.interfaces.ISendEmail;
+import co.edu.unicauca.microkernel.common.interfaces.ISendEmail;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

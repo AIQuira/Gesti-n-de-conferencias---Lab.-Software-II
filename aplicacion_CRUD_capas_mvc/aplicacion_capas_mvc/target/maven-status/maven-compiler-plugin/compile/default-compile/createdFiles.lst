@@ -17,6 +17,7 @@ co\edu\unicauca\mvc\accesoADatos\RepositorioAutorMemoriaArrayList.class
 co\edu\unicauca\mvc\accesoADatos\RepositorioConferenciaMemoriaArrayList.class
 co\edu\unicauca\mvc\modelos\Articulo.class
 co\edu\unicauca\mvc\vistas\articulos\VtnRegistrarArticulo$1.class
+co\edu\unicauca\mvc\modelos\EstadoRevision.class
 co\edu\unicauca\mvc\vistas\adminConferencia\VtnListarConferencias$2.class
 co\edu\unicauca\mvc\accesoADatos\InterfaceRepositorioOrganizador.class
 co\edu\unicauca\mvc\modelos\Conferencia.class
@@ -46,4 +47,5 @@ co\edu\unicauca\mvc\infraestructura\Subject.class
 co\edu\unicauca\mvc\modelos\Autor.class
 co\edu\unicauca\mvc\vistas\adminConferencia\VtnPrincipalAdmin.class
 co\edu\unicauca\mvc\vistas\articulos\Render.class
+co\edu\unicauca\mvc\vistas\articulos\Revisor.class
 co\edu\unicauca\mvc\vistas\autorPublicacion\VtnPrincipalAutor.class
