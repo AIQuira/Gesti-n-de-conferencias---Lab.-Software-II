@@ -19,10 +19,12 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
 
     public VtnListarArticulos(
             ServicioAlmacenamientoArticulos objServicio,
-            ServicioAlmacenamientoConferencias objServicio2) {
+            ServicioAlmacenamientoConferencias objServicio2,
+            ServicioAlmacenamientoRevisor objServicio3) {
         initComponents();
         this.objServicio = objServicio;
         this.objServicio2 = objServicio2;
+        this.objServicio3 = objServicio3;
         this.jTableListarArticulos.setDefaultRenderer(Object.class, new Render());
         inicializarTabla();
     }

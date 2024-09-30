@@ -215,7 +215,7 @@ public class VtnRegistrarArticulo extends javax.swing.JInternalFrame {
         objArticulo.setIdArticulo(1);
 
         bandera = this.objServicio1.almacenarArticulo(objArticulo);
-        Revisor revisor1 = new Revisor("Revisor 1");
+        RevisorVista revisor1 = new RevisorVista("Revisor 1");
         objServicio1.addObserver(revisor1);
 
         objArticulo.setEstadoRevision(EstadoRevision.REVISADO);

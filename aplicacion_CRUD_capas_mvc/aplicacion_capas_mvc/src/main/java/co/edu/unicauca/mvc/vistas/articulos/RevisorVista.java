@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
  *
  * @author wsern
  */
-public class Revisor implements Observer {
+public class RevisorVista implements Observer {
     private String nombre;
 
     // Constructor
-    public Revisor(String nombre) {
+    public RevisorVista(String nombre) {
         this.nombre = nombre;
     }
 
