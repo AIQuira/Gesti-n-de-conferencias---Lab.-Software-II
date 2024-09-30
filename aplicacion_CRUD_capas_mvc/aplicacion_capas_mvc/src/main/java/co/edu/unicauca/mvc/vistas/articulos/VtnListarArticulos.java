@@ -11,12 +11,24 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Ventana interna para listar artículos.
+ * Permite visualizar, actualizar, eliminar y asignar revisores a los artículos.
+ * 
+ */
 public class VtnListarArticulos extends javax.swing.JInternalFrame {
 
-    public ServicioAlmacenamientoArticulos objServicio;
-    public ServicioAlmacenamientoConferencias objServicio2;
-    public ServicioAlmacenamientoRevisor objServicio3;
+    public ServicioAlmacenamientoArticulos objServicio; // Servicio para manejar artículos
+    public ServicioAlmacenamientoConferencias objServicio2; // Servicio para manejar conferencias
+    public ServicioAlmacenamientoRevisor objServicio3; // Servicio para manejar revisores
 
+    /**
+     * Crea una nueva instancia de la ventana de listar artículos.
+     *
+     * @param objServicio Servicio para el manejo de artículos
+     * @param objServicio2 Servicio para el manejo de conferencias
+     * @param objServicio3 Servicio para el manejo de revisores
+     */
     public VtnListarArticulos(
             ServicioAlmacenamientoArticulos objServicio,
             ServicioAlmacenamientoConferencias objServicio2,
@@ -29,6 +41,10 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
         inicializarTabla();
     }
 
+    /**
+     * Inicializa la tabla para listar los artículos.
+     * Se configuran las columnas que se mostrarán en la tabla.
+     */
     private void inicializarTabla() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
@@ -42,6 +58,9 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
         this.jTableListarArticulos.setModel(model);
     }
 
+    /**
+     * Limpia las filas de la tabla.
+     */
     public void limpiarTabla() {
 
         DefaultTableModel modelo = (DefaultTableModel) this.jTableListarArticulos.getModel();
@@ -51,6 +70,10 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * Llena la tabla con los artículos disponibles.
+     * Obtiene la lista de artículos del servicio y los añade a la tabla.
+     */
     private void llenarTabla() {
         DefaultTableModel model = (DefaultTableModel) this.jTableListarArticulos.getModel();
         limpiarTabla();
@@ -216,17 +239,33 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Maneja el evento de clic en el botón de actualizar.
+     *
+     * @param evt Evento de clic en el botón de actualizar
+     */
     private void jButtonActalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActalizarActionPerformed
         llenarTabla();
     }//GEN-LAST:event_jButtonActalizarActionPerformed
 
+    /**
+     * Maneja el evento de clic en el botón de registrar.
+     *
+     * @param evt Evento de clic en el botón de registrar
+     */
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         VtnRegistrarArticulo1 objVtnRegistrarArticulo = new VtnRegistrarArticulo1(objServicio, objServicio2);
         objVtnRegistrarArticulo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         objVtnRegistrarArticulo.setVisible(true);
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
+    /**
+     * Maneja el evento de clic en la tabla para realizar acciones específicas 
+     * según la opción seleccionada en la fila.
+     *
+     * @param evt Evento de clic en la tabla
+     */
     private void jTableListarArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarArticulosMouseClicked
 
         int column = this.jTableListarArticulos.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -273,10 +312,13 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
                 }
             }
         }
-
-
     }//GEN-LAST:event_jTableListarArticulosMouseClicked
-
+    
+    /**
+     * Maneja el evento de clic en el botón de evaluar.
+     *
+     * @param evt Evento de clic en el botón de evaluar
+     */
     private void jButtonEvaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEvaluarActionPerformed
         // Crear instancia de la ventana de evaluación con el servicio necesario
         VtnEvaluarArticulo ventanaEvaluar = new VtnEvaluarArticulo(objServicio);

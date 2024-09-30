@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package co.edu.unicauca.mvc.vistas.articulos;
 
 import co.edu.unicauca.microkernel.common.interfaces.ISendEmail;
@@ -15,7 +11,10 @@ import co.edu.unicauca.mvc.plugins.EmailSenderPluginManager;
 import co.edu.unicauca.mvc.utilidades.Utilidades;
 
 /**
- *
+ * Ventana para registrar artículos en el sistema.
+ * Esta clase es responsable de la interfaz gráfica y la lógica
+ * para almacenar un artículo y enviar un correo de notificación.
+ * 
  * @author anais
  */
 public class VtnRegistrarArticulo1 extends javax.swing.JFrame {
@@ -23,6 +22,12 @@ public class VtnRegistrarArticulo1 extends javax.swing.JFrame {
     private ServicioAlmacenamientoArticulos objServicio1;
     private ServicioAlmacenamientoConferencias objServicio2;
     
+    /**
+     * Constructor de la ventana de registro de artículos.
+     * 
+     * @param objServicio1 Servicio para almacenar artículos.
+     * @param objServicio2 Servicio para almacenar conferencias.
+     */
     public VtnRegistrarArticulo1(ServicioAlmacenamientoArticulos objServicio1,
             ServicioAlmacenamientoConferencias objServicio2) {
         initComponents();
@@ -217,20 +222,32 @@ public class VtnRegistrarArticulo1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción que se ejecuta al hacer clic en el botón "Registrar".
+     * Obtiene los datos del artículo, lo almacena y envía un correo de notificación.
+     * 
+     * @param evt Evento de acción.
+     */
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         String titulo, autores;
         Conferencia objConferencia;
         boolean bandera;
-
+        
+        // Obtiene los datos ingresados por el usuario
         titulo = this.jTextFieldTitulo.getText();
         autores = this.jTextAreaAutores.getText();
-
+        
+        // Crea un nuevo objeto Articulo
         Articulo objArticulo = new Articulo(titulo, autores);
-        objArticulo.setIdArticulo(1);
+        objArticulo.setIdArticulo(1);// Establece un ID fijo para el artículo
 
+        // Almacena el artículo en el servicio
         bandera = this.objServicio1.almacenarArticulo(objArticulo);
-
+        
+        // Establece el estado de revisión del artículo
         objArticulo.setEstadoRevision(EstadoRevision.REVISADO);
+        
+        // Verifica si el artículo fue almacenado con éxito
         if (bandera == true) {
             Utilidades.mensajeExito("Registro exitoso", "Registro exitoso");
             
@@ -241,18 +258,20 @@ public class VtnRegistrarArticulo1 extends javax.swing.JFrame {
 
             // Obtener el plugin para Hotmail (o el servicio de correo que estés usando)
             ISendEmail emailPlugin = EmailSenderPluginManager.getInstance().getEmailPlugin("h");
-
+            
+            // Envía el correo si el plugin se encuentra disponible
             if (emailPlugin != null) {
                 emailPlugin.sendEmail("thaliaepe@hotmail.com", "carolt12345","juanpabernal20011@hotmail.com");
             } else {
                 System.out.println("No se encontró el plugin para el servicio de correo especificado.");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();// Manejo de excepciones durante el envío de correo
         }
 
         } else
         {
+            // Mensaje de error si el artículo no fue almacenado
             Utilidades.mensajeError("Articulo no almacenado","Error al almacenar el articulo");
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed

@@ -1,10 +1,5 @@
-
 package co.edu.unicauca.mvc.plugins;
 
-/**
- *
- * @author thali
- */
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,11 +9,32 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Clase que gestiona el envío de correos electrónicos utilizando un servidor SMTP.
+ * Este plugin permite enviar correos desde una cuenta de Hotmail/Outlook.
+ * 
+ * @author thali
+ */
 public class EmailPlugin {
 
+    /**
+     * Constructor de la clase EmailPlugin.
+     * 
+     * @param username Nombre de usuario (dirección de correo) desde donde se enviarán los correos.
+     * @param password Contraseña del correo.
+     * @param properties Propiedades de configuración del servidor SMTP.
+     */
     public EmailPlugin(String username, String password, Properties properties) {
     }
-    
+
+    /**
+     * Método que envía un correo electrónico.
+     * Utiliza la cuenta configurada para enviar un correo a una dirección específica.
+     * 
+     * @param to Dirección de correo del destinatario.
+     * @param subject Asunto del correo.
+     * @param body Cuerpo del correo (contenido del mensaje).
+     */
     public static void sendEmail(String to, String subject, String body) {
         final String username = "thaliaepe@hotmail.com"; // Tu cuenta de Hotmail
         final String password = "carolt12345"; // Tu contraseña de Hotmail
@@ -37,16 +53,17 @@ public class EmailPlugin {
                     return new PasswordAuthentication(username, password);
                 }
             });
-              try {
+
+        try {
             // Crear el mensaje
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(
                 Message.RecipientType.TO,
-                InternetAddress.parse("juanpabernal20011@hotmail.com") // Destinatario
+                InternetAddress.parse(to) // Destinatario
             );
-            message.setSubject("Advertencia de Compilación: Se generó una advertencia sobre operaciones no verificadas en RepositorioArticuloMemoriaArrayList. Puedes recompilar con la opción -Xlint:unchecked para obtener más detalles sobre esta advertencia.");
-            message.setText("Compilación Exitosa: El proyecto aplicacion_capas_mvc se construyó correctamente y se generó el archivo JAR.");
+            message.setSubject(subject); // Asunto del correo
+            message.setText(body); // Cuerpo del correo
 
             // Enviar el mensaje
             Transport.send(message);

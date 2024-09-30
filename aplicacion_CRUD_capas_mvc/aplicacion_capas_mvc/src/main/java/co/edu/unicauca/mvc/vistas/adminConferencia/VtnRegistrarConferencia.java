@@ -7,11 +7,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * Ventana para registrar una nueva conferencia en el sistema.
+ * 
+ * Esta clase extiende {@link javax.swing.JFrame} y proporciona la
+ * interfaz necesaria para que el administrador ingrese los datos
+ * de una conferencia, incluyendo nombre, fechas y costo.
+ */
 public class VtnRegistrarConferencia extends javax.swing.JFrame {
 
     private ServicioAlmacenamientoConferencias objServicioAlmacenamiento;
     
+    /**
+     * Constructor de la clase.
+     * 
+     * @param objServicioAlmacenamiento Servicio para almacenar conferencias.
+     */
     public VtnRegistrarConferencia(ServicioAlmacenamientoConferencias objServicioAlmacenamiento) {
         initComponents();
         this.objServicioAlmacenamiento=objServicioAlmacenamiento;
@@ -152,7 +163,16 @@ public class VtnRegistrarConferencia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Maneja el evento de acción del botón "Registrar".
+     * 
+     * Este método se ejecuta cuando se hace clic en el botón de registro.
+     * Obtiene los datos ingresados por el usuario, valida las fechas y el costo,
+     * y almacena la nueva conferencia en el sistema.
+     * 
+     * @param evt Evento que desencadena la acción.
+     */
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         
         String nombre, fechaInicio, fechaFin, costo;
@@ -193,11 +213,7 @@ public class VtnRegistrarConferencia extends javax.swing.JFrame {
             
         } catch (ParseException ex) {
             Utilidades.mensajeAdvertencia("La fecha de inicio no sigue el formato dd/MM/yyyy","Fecha incorrecta");
-        }
-        
-        
-        
-        
+        }      
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
 

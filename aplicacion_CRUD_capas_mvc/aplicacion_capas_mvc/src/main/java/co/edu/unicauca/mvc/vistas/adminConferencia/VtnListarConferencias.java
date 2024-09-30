@@ -9,16 +9,31 @@ import javax.swing.table.DefaultTableModel;
 import co.edu.unicauca.mvc.modelos.Conferencia;
 import java.util.LinkedList;
 
+/**
+ * Ventana para listar conferencias en el sistema.
+ * 
+ * Esta clase extiende {@link javax.swing.JInternalFrame} y permite visualizar
+ * un listado de conferencias registradas, así como agregar nuevas conferencias
+ * mediante una ventana de registro.
+ */
 public class VtnListarConferencias extends javax.swing.JInternalFrame {
 
     private ServicioAlmacenamientoConferencias objServicioAlmacenamiento;
     
+    /**
+     * Constructor de la clase.
+     * 
+     * @param objServicioAlmacenamiento Servicio para almacenar conferencias.
+     */
     public VtnListarConferencias(ServicioAlmacenamientoConferencias objServicioAlmacenamiento) {
         initComponents();
         this.objServicioAlmacenamiento=objServicioAlmacenamiento;
         iniciarlizarTabla();
     }
-
+    
+    /**
+     * Inicializa la tabla donde se mostrarán las conferencias.
+     */
     private void iniciarlizarTabla()
     {
        DefaultTableModel model= new DefaultTableModel();       
@@ -29,6 +44,9 @@ public class VtnListarConferencias extends javax.swing.JInternalFrame {
        this.jTableListadoConferencias.setModel(model);
     }
     
+    /**
+     * Limpia el contenido de la tabla de conferencias.
+     */
     public void limpiarTabla(){
         
         DefaultTableModel modelo=(DefaultTableModel) this.jTableListadoConferencias.getModel();
@@ -38,6 +56,9 @@ public class VtnListarConferencias extends javax.swing.JInternalFrame {
         }        
     }
     
+    /**
+     * Llena la tabla con la lista de conferencias almacenadas.
+     */
     private void llenarTabla()
     {
         DefaultTableModel model=(DefaultTableModel) this.jTableListadoConferencias.getModel();

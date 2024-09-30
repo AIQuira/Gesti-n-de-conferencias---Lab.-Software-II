@@ -7,7 +7,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Ventana para evaluar un artículo.
+ * Permite a los revisores seleccionar un artículo de una lista y proceder con la evaluación.
+ * 
  * @author sonhuila
  */
 public class VtnEvaluarArticulo extends javax.swing.JFrame {
@@ -15,9 +17,9 @@ public class VtnEvaluarArticulo extends javax.swing.JFrame {
     private ServicioAlmacenamientoArticulos servicioAlmacenamiento; // Servicio de manejo de artículos
 
     /**
-     * Creates new form VtnEvaluarArticulo
+     * Crea una nueva instancia de la ventana de evaluación de artículos.
      *
-     * @param servicioAlmacenamiento
+     * @param servicioAlmacenamiento Servicio para el manejo de artículos
      */
     public VtnEvaluarArticulo(ServicioAlmacenamientoArticulos servicioAlmacenamiento) {
         this.servicioAlmacenamiento = servicioAlmacenamiento;
@@ -27,6 +29,7 @@ public class VtnEvaluarArticulo extends javax.swing.JFrame {
 
     /**
      * Carga los artículos en el ComboBox al iniciar la ventana.
+     * Limpiar el ComboBox antes de cargar nuevos elementos.
      */
     private void cargarArticulosEnComboBox() {
         jComboBoxArticulos.removeAllItems(); // Limpiar ComboBox

@@ -1,10 +1,16 @@
 package co.edu.unicauca.mvc.modelos;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.List;
 
+/**
+ * La clase Articulo representa un artículo que puede ser revisado por
+ * un revisor. Administra su estado de revisión y contiene información
+ * relevante como título, autores y conferencia asociada.
+ * 
+ * @version 1.1
+ * @since 2024
+ */
 public class Articulo {
 
     private int idArticulo;
@@ -23,16 +29,20 @@ public class Articulo {
         transicionesValidas.put(EstadoRevision.REVISADO, EnumSet.noneOf(EstadoRevision.class));  // No puede cambiar una vez revisado
     }    
     
+    /**
+     * Constructor para crear un artículo con un título y autores.
+     * El estado de revisión se inicializa en PENDIENTE.
+     *
+     * @param titulo El título del artículo.
+     * @param autores Los autores del artículo.
+     */
     public Articulo(String titulo, String autores) {
         this.titulo = titulo;
         this.autores = autores;
         this.estadoRevision = EstadoRevision.PENDIENTE; // Estado inicial
     }
 
-    public void setEstadoRevision(EstadoRevision estadoRevision) {
-        this.estadoRevision = estadoRevision;
-    }
-
+    // Getters y Setters
     public int getIdArticulo() {
         return idArticulo;
     }
@@ -46,6 +56,9 @@ public class Articulo {
     }
 
     public void setTitulo(String titulo) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El título no puede ser nulo o vacío.");
+        }
         this.titulo = titulo;
     }
 
@@ -54,6 +67,9 @@ public class Articulo {
     }
 
     public void setAutores(String autores) {
+        if (autores == null || autores.trim().isEmpty()) {
+            throw new IllegalArgumentException("Los autores no pueden ser nulos o vacíos.");
+        }
         this.autores = autores;
     }
 
@@ -76,7 +92,18 @@ public class Articulo {
     public EstadoRevision getEstadoRevision() {
         return estadoRevision;
     }
-    
+
+    public void setEstadoRevision(EstadoRevision estadoRevision) {
+        this.estadoRevision = estadoRevision;
+    }
+
+    /**
+     * Cambia el estado de revisión del artículo a un nuevo estado
+     * si la transición es válida.
+     *
+     * @param nuevoEstado El nuevo estado de revisión.
+     * @return true si el cambio fue exitoso, false de lo contrario.
+     */
     public boolean cambiarEstado(EstadoRevision nuevoEstado) {
         // Verificar si la transición es válida
         if (transicionesValidas.get(estadoRevision).contains(nuevoEstado)) {

@@ -8,14 +8,22 @@ import co.edu.unicauca.mvc.utilidades.Utilidades;
 import java.util.ArrayList;
 
 /**
- *
+ * Ventana para asignar un revisor a un artículo.
+ * Permite al usuario seleccionar un revisor de una lista y asignarlo al artículo correspondiente.
+ * 
  * @author anais
  */
 public class VtnAsignarRevisor extends javax.swing.JFrame {
 
-    private ServicioAlmacenamientoArticulos objServicio1;
-    private ServicioAlmacenamientoRevisor objServicio2;
+    private ServicioAlmacenamientoArticulos objServicio1;// Servicio para el manejo de artículos
+    private ServicioAlmacenamientoRevisor objServicio2;// Servicio para el manejo de revisores
     
+    /**
+     * Constructor de la clase VtnAsignarRevisor.
+     *
+     * @param objServicio1 Servicio de almacenamiento de artículos
+     * @param objServicio2 Servicio de almacenamiento de revisores
+     */
     public VtnAsignarRevisor(ServicioAlmacenamientoArticulos objServicio1,
             ServicioAlmacenamientoRevisor objServicio2) {
         initComponents();
@@ -24,6 +32,11 @@ public class VtnAsignarRevisor extends javax.swing.JFrame {
         cargarRevisores();
     }
     
+    /**
+     * Carga los datos del artículo en los campos de texto.
+     *
+     * @param idArticulo ID del artículo a cargar
+     */
     public void cargarDatos(int idArticulo) {
         Articulo objArticulo = this.objServicio1.consultarArticulo(idArticulo);
         this.jTextFieldId.setText(objArticulo.getIdArticulo()+"");
@@ -32,6 +45,9 @@ public class VtnAsignarRevisor extends javax.swing.JFrame {
         this.jComboBoxRevisores.setSelectedItem(objArticulo.getRevisor());
     }
     
+    /**
+     * Carga los revisores disponibles en el JComboBox.
+     */
     private void cargarRevisores() {
         ArrayList<Revisor> revisores = (ArrayList<Revisor>) this.objServicio2.listarRevisores();
         for (int i = 0; i < revisores.size(); i++) {
@@ -177,6 +193,13 @@ public class VtnAsignarRevisor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de acción del botón para asignar un revisor al artículo.
+     * Toma el ID del artículo, el título, los autores y el revisor seleccionado,
+     * y realiza la asignación en el sistema.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String titulo, autores;
         Revisor objRevisor;

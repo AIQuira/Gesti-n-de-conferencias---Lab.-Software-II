@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package co.edu.unicauca.mvc.test;
+
 import co.edu.unicauca.mvc.accesoADatos.InterfaceRepositorioArticulo;
-import co.edu.unicauca.mvc.accesoADatos.RepositorioArticuloMemoriaArrayList;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoArticulos;
 import co.edu.unicauca.mvc.modelos.Articulo;
-import co.edu.unicauca.mvc.modelos.EstadoRevision;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,30 +11,40 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Clase de prueba para la funcionalidad del servicio de almacenamiento de artículos.
+ * Esta clase contiene pruebas para almacenar, listar, eliminar, consultar y actualizar artículos.
+ * 
+ * @author thali
+ */
 class ServiciosArticuloTest {
 
-      private ServicioAlmacenamientoArticulos servicio;
-    private InterfaceRepositorioArticulo repositorioMock;
+    private ServicioAlmacenamientoArticulos servicio; // Servicio para manejar artículos
+    private InterfaceRepositorioArticulo repositorioMock; // Repositorio simulado para pruebas
 
-     @BeforeEach
+    /**
+     * Método que se ejecuta antes de cada prueba.
+     * Inicializa el repositorio simulado y almacena un artículo de prueba.
+     */
+    @BeforeEach
     void setUp() {
         // Inicializar el repositorio simulado
         repositorioMock = new InterfaceRepositorioArticulo() {
-            private List<Articulo> articulos = new ArrayList<>();
+            private List<Articulo> articulos = new ArrayList<>(); // Lista de artículos almacenados
 
             @Override
             public boolean almacenarArticulo(Articulo objArticulo) {
-                return articulos.add(objArticulo);
+                return articulos.add(objArticulo); // Almacena el artículo en la lista
             }
 
             @Override
             public List<Articulo> listarArticulos() {
-                return articulos;
+                return articulos; // Devuelve la lista de artículos
             }
 
             @Override
             public boolean eliminarArticulo(int idArticulo) {
-                return articulos.removeIf(a -> a.getIdArticulo() == idArticulo);
+                return articulos.removeIf(a -> a.getIdArticulo() == idArticulo); // Elimina el artículo por ID
             }
 
             @Override
@@ -47,34 +52,39 @@ class ServiciosArticuloTest {
                 return articulos.stream()
                         .filter(a -> a.getIdArticulo() == idArticulo)
                         .findFirst()
-                        .orElse(null);
+                        .orElse(null); // Consulta el artículo por ID
             }
 
             @Override
             public boolean actualizarArticulo(Articulo objArticulo) {
                 for (int i = 0; i < articulos.size(); i++) {
                     if (articulos.get(i).getIdArticulo() == objArticulo.getIdArticulo()) {
-                        articulos.set(i, objArticulo);
+                        articulos.set(i, objArticulo); // Actualiza el artículo existente
                         return true;
                     }
                 }
-                return false;
+                return false; // Retorna false si no se encuentra el artículo
             }
         };
 
-                servicio = new ServicioAlmacenamientoArticulos(repositorioMock);
+        // Inicializa el servicio de almacenamiento de artículos con el repositorio simulado
+        servicio = new ServicioAlmacenamientoArticulos(repositorioMock);
 
-        // Crear un artículo de prueba para usar en las pruebas
+        // Crear un artículo de prueba y almacenarlo
         Articulo articuloPrueba = new Articulo("Título Prueba", "Autores Prueba");
         articuloPrueba.setIdArticulo(1); // Asignar un ID único al artículo de prueba
         servicio.almacenarArticulo(articuloPrueba); // Almacenar el artículo de prueba
     }
 
+    /**
+     * Prueba para almacenar un nuevo artículo.
+     * Verifica que el artículo se almacene correctamente en el repositorio.
+     */
     @Test
     void testAlmacenarArticulo() {
         // Crear un nuevo artículo
         Articulo nuevoArticulo = new Articulo("Nuevo Artículo", "Nuevos Autores");
-        nuevoArticulo.setIdArticulo(2);  // Asignar un nuevo ID
+        nuevoArticulo.setIdArticulo(2); // Asignar un nuevo ID
 
         // Llamar al método almacenarArticulo
         boolean resultado = servicio.almacenarArticulo(nuevoArticulo);
@@ -84,6 +94,10 @@ class ServiciosArticuloTest {
         assertEquals(2, servicio.listarArticulos().size(), "Debería haber 2 artículos almacenados.");
     }
 
+    /**
+     * Prueba para listar todos los artículos almacenados.
+     * Verifica que el artículo de prueba esté en la lista.
+     */
     @Test
     void testListarArticulos() {
         // Llamar al método listarArticulos
@@ -94,6 +108,10 @@ class ServiciosArticuloTest {
         assertEquals("Título Prueba", listaArticulos.get(0).getTitulo(), "El título del artículo debería coincidir.");
     }
 
+    /**
+     * Prueba para eliminar un artículo por su ID.
+     * Verifica que el artículo se elimine correctamente.
+     */
     @Test
     void testEliminarArticulo() {
         // Eliminar el artículo con ID 1
@@ -104,6 +122,10 @@ class ServiciosArticuloTest {
         assertEquals(0, servicio.listarArticulos().size(), "No debería haber artículos almacenados.");
     }
 
+    /**
+     * Prueba para consultar un artículo por su ID.
+     * Verifica que se pueda consultar correctamente el artículo existente.
+     */
     @Test
     void testConsultarArticulo() {
         // Consultar el artículo con ID 1
@@ -114,6 +136,10 @@ class ServiciosArticuloTest {
         assertEquals(1, articuloConsultado.getIdArticulo(), "El ID del artículo debería ser 1.");
     }
 
+    /**
+     * Prueba para actualizar un artículo existente.
+     * Verifica que el artículo se actualice correctamente.
+     */
     @Test
     void testActualizarArticulo() {
         // Crear un artículo actualizado
@@ -133,5 +159,4 @@ class ServiciosArticuloTest {
         assertEquals("Título Actualizado", articuloConsultado.getTitulo(), "El título del artículo debería haberse actualizado.");
         assertEquals("Autores Actualizados", articuloConsultado.getAutores(), "Los autores deberían haberse actualizado.");
     }
-
 }

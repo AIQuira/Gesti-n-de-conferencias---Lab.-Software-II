@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package co.edu.unicauca.mvc.vistas.articulos;
 
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoArticulos;
@@ -14,37 +10,52 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- *
+ * Ventana para actualizar los datos de un artículo.
+ * Permite al usuario modificar el título, autores y la conferencia asociada a un artículo.
+ * También permite cambiar el estado de revisión del artículo.
+ * 
  * @author HSVSTT2
  */
 public class VtnActualizarArticulo extends javax.swing.JFrame {
 
     private ServicioAlmacenamientoArticulos objServicio1;
     private ServicioAlmacenamientoConferencias objServicio2;
-    
+
+    /**
+     * Constructor de la clase VtnActualizarArticulo.
+     *
+     * @param objServicio1 Servicio de almacenamiento de artículos
+     * @param objServicio2 Servicio de almacenamiento de conferencias
+     */
     public VtnActualizarArticulo(
             ServicioAlmacenamientoArticulos objServicio1,
             ServicioAlmacenamientoConferencias objServicio2) {
         initComponents();
-        this.objServicio1=objServicio1;
-        this.objServicio2=objServicio2;
+        this.objServicio1 = objServicio1;
+        this.objServicio2 = objServicio2;
         cargarConferencias();
     }
-    
-    public void cargarDatos(int idArticulo)
-    {
-        Articulo objArticulo=this.objServicio1.consultarArticulo(idArticulo);
-        this.jTextFieldId.setText(objArticulo.getIdArticulo()+"");
+
+    /**
+     * Carga los datos del artículo en los campos de texto.
+     *
+     * @param idArticulo ID del artículo a cargar
+     */
+    public void cargarDatos(int idArticulo) {
+        Articulo objArticulo = this.objServicio1.consultarArticulo(idArticulo);
+        this.jTextFieldId.setText(objArticulo.getIdArticulo() + "");
         this.jTextFieldTitulo.setText(objArticulo.getTitulo());
         this.jTextAreaAutores.setText(objArticulo.getAutores());
         this.jComboBoxConferencia.setSelectedItem(objArticulo.getObjConferencia());
     }
-    
-    public void cargarConferencias()
-    {
-        
-        ArrayList<Conferencia> conferencias= (ArrayList<Conferencia>) this.objServicio2.listarConferencias();
-         for (int i = 0; i < conferencias.size(); i++) {
+
+    /**
+     * Carga las conferencias disponibles en el JComboBox.
+     */
+    public void cargarConferencias() {
+
+        ArrayList<Conferencia> conferencias = (ArrayList<Conferencia>) this.objServicio2.listarConferencias();
+        for (int i = 0; i < conferencias.size(); i++) {
             this.jComboBoxConferencia.addItem(conferencias.get(i));
         }
     }
@@ -206,62 +217,66 @@ public class VtnActualizarArticulo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de acción del botón de actualizar.
+     * Actualiza los datos del artículo en el sistema y gestiona el cambio de estado.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-         String titulo, autores, id, estado;
-    Conferencia objConferencia;
-    boolean bandera;
-    int idArticulo;
+        String titulo, autores, id, estado;
+        Conferencia objConferencia;
+        boolean bandera;
+        int idArticulo;
 
-    try {
-        // Obtener el ID del artículo y convertirlo a entero
-        id = this.jTextFieldId.getText();
-        idArticulo = Integer.parseInt(id);
+        try {
+            // Obtener el ID del artículo y convertirlo a entero
+            id = this.jTextFieldId.getText();
+            idArticulo = Integer.parseInt(id);
 
-        // Obtener el título, autores y conferencia
-        titulo = this.jTextFieldTitulo.getText();
-        autores = this.jTextAreaAutores.getText();
-        objConferencia = (Conferencia) this.jComboBoxConferencia.getSelectedItem();
+            // Obtener el título, autores y conferencia
+            titulo = this.jTextFieldTitulo.getText();
+            autores = this.jTextAreaAutores.getText();
+            objConferencia = (Conferencia) this.jComboBoxConferencia.getSelectedItem();
 
-        // Obtener el estado seleccionado en el JComboBox
-        estado = (String) jComboEstadoRevision.getSelectedItem();
+            // Obtener el estado seleccionado en el JComboBox
+            estado = (String) jComboEstadoRevision.getSelectedItem();
 
-        // Consultar el artículo existente en lugar de crear uno nuevo
-        Articulo objArticulo = objServicio1.consultarArticulo(idArticulo);
+            // Consultar el artículo existente en lugar de crear uno nuevo
+            Articulo objArticulo = objServicio1.consultarArticulo(idArticulo);
 
-        // Verificar si el artículo existe
-        if (objArticulo != null) {
-            // Actualizar los datos del artículo
-            objArticulo.setTitulo(titulo);
-            objArticulo.setAutores(autores);
-            objArticulo.setObjConferencia(objConferencia);
+            // Verificar si el artículo existe
+            if (objArticulo != null) {
+                // Actualizar los datos del artículo
+                objArticulo.setTitulo(titulo);
+                objArticulo.setAutores(autores);
+                objArticulo.setObjConferencia(objConferencia);
 
-            // Intentar cambiar el estado del artículo usando la validación
-            boolean estadoCambiado = objServicio1.cambiarEstadoArticulo(idArticulo, EstadoRevision.valueOf(estado));
+                // Intentar cambiar el estado del artículo usando la validación
+                boolean estadoCambiado = objServicio1.cambiarEstadoArticulo(idArticulo, EstadoRevision.valueOf(estado));
 
-            if (estadoCambiado) {
-                // Si la transición de estado es válida, actualizar el artículo en el sistema
-                bandera = this.objServicio1.actualizarArticulo(objArticulo);
+                if (estadoCambiado) {
+                    // Si la transición de estado es válida, actualizar el artículo en el sistema
+                    bandera = this.objServicio1.actualizarArticulo(objArticulo);
 
-                if (bandera) {
-                    Utilidades.mensajeExito("Artículo actualizado exitosamente", "Artículo actualizado");
+                    if (bandera) {
+                        Utilidades.mensajeExito("Artículo actualizado exitosamente", "Artículo actualizado");
+                    } else {
+                        Utilidades.mensajeError("Error al actualizar el artículo", "Error al actualizar");
+                    }
                 } else {
-                    Utilidades.mensajeError("Error al actualizar el artículo", "Error al actualizar");
+                    Utilidades.mensajeError("Transición de estado no válida", "Error en el cambio de estado");
                 }
             } else {
-                Utilidades.mensajeError("Transición de estado no válida", "Error en el cambio de estado");
+                Utilidades.mensajeError("No se encontró el artículo con ID: " + idArticulo, "Error");
             }
-        } else {
-            Utilidades.mensajeError("No se encontró el artículo con ID: " + idArticulo, "Error");
+
+        } catch (NumberFormatException e) {
+            Utilidades.mensajeError("ID de artículo inválido", "Error");
+        } catch (IllegalArgumentException e) {
+            Utilidades.mensajeError("Estado de revisión inválido: ", "Error");
         }
-
-    } catch (NumberFormatException e) {
-        Utilidades.mensajeError("ID de artículo inválido", "Error");
-    } catch (IllegalArgumentException e) {
-        Utilidades.mensajeError("Estado de revisión inválido: " , "Error");
-    }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;

@@ -10,6 +10,13 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+/**
+ * Ventana principal para la administración del sistema.
+ * 
+ * Esta clase extiende {@link javax.swing.JFrame} y proporciona la interfaz
+ * principal para el administrador, permitiendo la gestión de conferencias,
+ * artículos y estadísticas.
+ */
 public class VtnPrincipalAdmin extends javax.swing.JFrame {
     
     private VtnVerEstadisticas objVtnVerEstadisticas;
@@ -19,13 +26,24 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     private ServicioAlmacenamientoConferencias objServicio1;   
     private ServicioAlmacenamientoArticulos  objServicio2;
     private ServicioAlmacenamientoRevisor  objServicio3;
-        
+    
+    /**
+     * Constructor de la clase.
+     * Inicializa la ventana y establece su icono.
+     */
     public VtnPrincipalAdmin() {
         initComponents();
         establecerIconoOrganización();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
+    /**
+     * Asocia los servicios de almacenamiento a la ventana principal.
+     * 
+     * @param objServicio1 Servicio de almacenamiento de conferencias.
+     * @param objServicio2 Servicio de almacenamiento de artículos.
+     * @param objServicio3 Servicio de almacenamiento de revisores.
+     */
     public void asociarServios(
             ServicioAlmacenamientoConferencias objServicio1,
             ServicioAlmacenamientoArticulos objServicio2,
@@ -37,6 +55,10 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         relacionarInternalFrameConJdesptokPane();
     }
     
+    /**
+     * Relaciona las ventanas internas con el panel principal.
+     * Agrega las diferentes vistas internas al panel de escritorio.
+     */
     private void relacionarInternalFrameConJdesptokPane()
     {
         this.objVtnVerEstadisticas=new VtnVerEstadisticas();         
@@ -51,7 +73,11 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         this.objVtnListarArticulos = new VtnListarArticulos(this.objServicio2, this.objServicio1, this.objServicio3);
         this.jDesktopPanelPrincipal.add(this.objVtnListarArticulos);
     }
-
+    
+    /**
+     * Establece el icono de la organización en la ventana principal.
+     * Carga la imagen desde el recurso especificado y la ajusta.
+     */
     private void establecerIconoOrganización()
     {
         Image img1= new ImageIcon(getClass().getResource("/recursos/logo.png")).getImage();
