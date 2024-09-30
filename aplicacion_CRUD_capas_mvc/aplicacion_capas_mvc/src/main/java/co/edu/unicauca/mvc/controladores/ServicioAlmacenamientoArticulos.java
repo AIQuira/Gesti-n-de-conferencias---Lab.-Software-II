@@ -4,6 +4,7 @@ import co.edu.unicauca.mvc.accesoADatos.InterfaceRepositorioArticulo;
 import co.edu.unicauca.mvc.infraestructura.Subject;
 import co.edu.unicauca.mvc.modelos.Articulo;
 import co.edu.unicauca.mvc.modelos.EstadoRevision;
+import co.edu.unicauca.mvc.modelos.Revisor;
 import java.util.List;
 
 
@@ -48,5 +49,20 @@ public class ServicioAlmacenamientoArticulos extends Subject{
                 break;
             }
         }
+    }
+    
+    public boolean asignarRevisorArticulo (int idArticulo, Revisor objRevisor){
+        Articulo articulo = this.referenciaRepositorioArticulo.consultarArticulo(idArticulo);
+        if (articulo != null) {
+            if (articulo.getRevisor() == null) { // Verificar si no tiene revisor asignado
+                articulo.setRevisor(objRevisor); // Asignar el revisor
+                return true; // Éxito
+            } else {
+                // Manejar el caso en el que ya tiene un revisor asignado
+                System.out.println("El artículo ya tiene un revisor asignado.");
+                return false; // Fallo en la asignación
+            }
+        }
+        return false;
     }
 }

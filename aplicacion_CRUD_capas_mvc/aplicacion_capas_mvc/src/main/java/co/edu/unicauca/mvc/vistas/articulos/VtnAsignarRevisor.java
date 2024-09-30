@@ -38,7 +38,7 @@ public class VtnAsignarRevisor extends javax.swing.JFrame {
             this.jComboBoxRevisores.addItem(revisores.get(i));
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,7 +190,8 @@ public class VtnAsignarRevisor extends javax.swing.JFrame {
         
         Articulo objArticulo = new Articulo(titulo, autores);
         objArticulo.setRevisor(objRevisor);
-        bandera = this.objServicio1.actualizarArticulo(objArticulo);
+        bandera = this.objServicio1.asignarRevisorArticulo(idArticulo, objRevisor);
+        
         if (bandera){
             Utilidades.mensajeExito("Revisor asignado correctamente", "Asignar revisor");
         } else {
