@@ -14,6 +14,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     private VtnVerEstadisticas objVtnVerEstadisticas;
     private VtnRegistrarArticulo objVtnRegistrarArticulos;
     private VtnListarConferencias objVtnListarConferencias;
+    private VtnListarArticulos objVtnListarArticulos;
     private ServicioAlmacenamientoConferencias objServicio1;   
     private ServicioAlmacenamientoArticulos  objServicio2;
         
@@ -42,6 +43,9 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         
         this.objVtnListarConferencias= new VtnListarConferencias(this.objServicio1);
         this.jDesktopPanelPrincipal.add(this.objVtnListarConferencias);
+        
+        this.objVtnListarArticulos = new VtnListarArticulos(this.objServicio2, this.objServicio1);
+        this.jDesktopPanelPrincipal.add(this.objVtnListarArticulos);
     }
 
     private void establecerIconoOrganización()
@@ -195,7 +199,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegistrarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarArticuloActionPerformed
-        this.objVtnRegistrarArticulos.setVisible(true);
+        this.objVtnListarArticulos.setVisible(true);
         this.objVtnVerEstadisticas.setVisible(false);
         this.objVtnListarConferencias.setVisible(false);
     }//GEN-LAST:event_jButtonRegistrarArticuloActionPerformed

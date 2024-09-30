@@ -8,6 +8,7 @@ public class Articulo {
     private EstadoRevision estadoRevision;
 
     private Conferencia objConferencia;
+    private Revisor revisor;
 
     public Articulo(String titulo, String autores) {
         this.titulo = titulo;
@@ -50,4 +51,17 @@ public class Articulo {
     public void setObjConferencia(Conferencia objConferencia) {
         this.objConferencia = objConferencia;
     }
+
+    public Revisor getRevisor() {
+        return revisor;
+    }
+
+    public void setRevisor(Revisor revisor) {
+        this.revisor = revisor;
+    }
+
+    public EstadoRevision getEstadoRevision() {
+        return estadoRevision;
+    }
+    
 }

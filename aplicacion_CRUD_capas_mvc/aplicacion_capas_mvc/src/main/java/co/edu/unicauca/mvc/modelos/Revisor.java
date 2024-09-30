@@ -56,5 +56,10 @@ public class Revisor {
     public boolean asignarArticulo(Articulo articulo) {
         return articulosAsignados.add(articulo);
     }
+    
+    @Override
+    public String toString(){
+        return this.nombres + this.apellidos;
+    }
 
 }
