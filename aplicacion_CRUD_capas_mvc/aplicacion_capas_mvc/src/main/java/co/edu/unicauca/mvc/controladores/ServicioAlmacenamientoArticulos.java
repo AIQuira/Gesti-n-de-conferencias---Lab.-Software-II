@@ -3,42 +3,42 @@ package co.edu.unicauca.mvc.controladores;
 import co.edu.unicauca.mvc.accesoADatos.InterfaceRepositorioArticulo;
 import co.edu.unicauca.mvc.infraestructura.Subject;
 import co.edu.unicauca.mvc.modelos.Articulo;
+import co.edu.unicauca.mvc.modelos.ArticuloReview;
 import co.edu.unicauca.mvc.modelos.EstadoRevision;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+public class ServicioAlmacenamientoArticulos extends Subject {
 
-public class ServicioAlmacenamientoArticulos extends Subject{
     private InterfaceRepositorioArticulo referenciaRepositorioArticulo;
-    
-    public ServicioAlmacenamientoArticulos(InterfaceRepositorioArticulo referenciaRepositorioArticulo)
-    {
-        this.referenciaRepositorioArticulo=referenciaRepositorioArticulo;
+    private Map<Articulo, List<ArticuloReview>> revisionesPorArticulo = new HashMap<>();
+
+    public ServicioAlmacenamientoArticulos(InterfaceRepositorioArticulo referenciaRepositorioArticulo) {
+        this.referenciaRepositorioArticulo = referenciaRepositorioArticulo;
     }
-    
-    public boolean almacenarArticulo(Articulo objArticulo)
-    {
+
+    public boolean almacenarArticulo(Articulo objArticulo) {
         return this.referenciaRepositorioArticulo.almacenarArticulo(objArticulo);
     }
-      
-    public List<Articulo> listarArticulos()
-    {
+
+    public List<Articulo> listarArticulos() {
         return this.referenciaRepositorioArticulo.listarArticulos();
     }
-    
-    public boolean eliminarArticulo(int idArticulo)
-    {
+
+    public boolean eliminarArticulo(int idArticulo) {
         return this.referenciaRepositorioArticulo.eliminarArticulo(idArticulo);
     }
-    
-    public Articulo consultarArticulo(int idArticulo)
-    {
+
+    public Articulo consultarArticulo(int idArticulo) {
         return this.referenciaRepositorioArticulo.consultarArticulo(idArticulo);
     }
-    
-    public boolean actualizarArticulo(Articulo objArticulo)
-    {
+
+    public boolean actualizarArticulo(Articulo objArticulo) {
         return this.referenciaRepositorioArticulo.actualizarArticulo(objArticulo);
     }
+
     // Método para cambiar el estado de revisión del artículo
     public void cambiarEstadoArticulo(String tituloArticulo, EstadoRevision nuevoEstado) {
         for (Articulo articulo : listarArticulos()) {
@@ -48,5 +48,14 @@ public class ServicioAlmacenamientoArticulos extends Subject{
                 break;
             }
         }
+    }
+
+    public void agregarRevisionArticulo(Articulo articulo, ArticuloReview revision) {
+        revisionesPorArticulo.putIfAbsent(articulo, new ArrayList<>());
+        revisionesPorArticulo.get(articulo).add(revision);
+    }
+    
+    public List<ArticuloReview> obtenerRevisionesArticulo(Articulo articulo) {
+        return revisionesPorArticulo.getOrDefault(articulo, new ArrayList<>());
     }
 }

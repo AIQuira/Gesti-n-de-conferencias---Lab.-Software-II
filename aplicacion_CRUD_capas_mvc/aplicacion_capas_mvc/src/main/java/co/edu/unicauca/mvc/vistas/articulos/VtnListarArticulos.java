@@ -64,7 +64,7 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
         JButton JButtonActualizarArticulo = new JButton();
         JButtonActualizarArticulo.setName("Actualizar");
         JButtonActualizarArticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/aplicar.png")));
-        
+
         JButton JButtonAsignarRevisor = new JButton();
         JButtonAsignarRevisor.setName("AsignarRevisor");
         JButtonAsignarRevisor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/assing.png")));
@@ -98,6 +98,7 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
         jTableListarArticulos = new javax.swing.JTable();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonActalizar = new javax.swing.JButton();
+        jButtonEvaluar = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -174,6 +175,13 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonEvaluar.setText("Evaluar");
+        jButtonEvaluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEvaluarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -181,9 +189,11 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addComponent(jButtonActalizar)
-                .addGap(293, 293, 293)
+                .addGap(109, 109, 109)
+                .addComponent(jButtonEvaluar)
+                .addGap(109, 109, 109)
                 .addComponent(jButtonRegistrar)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -195,7 +205,8 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonActalizar)
-                    .addComponent(jButtonRegistrar))
+                    .addComponent(jButtonRegistrar)
+                    .addComponent(jButtonEvaluar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -266,9 +277,17 @@ public class VtnListarArticulos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTableListarArticulosMouseClicked
 
+    private void jButtonEvaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEvaluarActionPerformed
+        // Crear instancia de la ventana de evaluación con el servicio necesario
+        VtnEvaluarArticulo ventanaEvaluar = new VtnEvaluarArticulo(objServicio);
+        ventanaEvaluar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ventanaEvaluar.setVisible(true);
+    }//GEN-LAST:event_jButtonEvaluarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActalizar;
+    private javax.swing.JButton jButtonEvaluar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

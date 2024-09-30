@@ -1,5 +1,8 @@
 package co.edu.unicauca.mvc.modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Articulo {
 
     private int idArticulo;
@@ -63,5 +66,4 @@ public class Articulo {
     public EstadoRevision getEstadoRevision() {
         return estadoRevision;
     }
-    
 }
