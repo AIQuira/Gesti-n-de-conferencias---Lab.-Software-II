@@ -7,6 +7,10 @@ import java.util.List;
 public class RepositorioRevisorMemoriaArrayList implements InterfaceRepositorioRevisor {
 
     private ArrayList<Revisor> listaRevisores;
+    
+    public RepositorioRevisorMemoriaArrayList () {
+        this.listaRevisores = new ArrayList();
+    }
 
     @Override
     public boolean almacenarRevisor(Revisor objRevisor) {

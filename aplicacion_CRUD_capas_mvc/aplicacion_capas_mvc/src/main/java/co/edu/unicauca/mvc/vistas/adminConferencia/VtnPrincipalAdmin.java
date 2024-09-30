@@ -3,6 +3,7 @@ package co.edu.unicauca.mvc.vistas.adminConferencia;
 
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoArticulos;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoConferencias;
+import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoRevisor;
 import co.edu.unicauca.mvc.vistas.articulos.VtnListarArticulos;
 import co.edu.unicauca.mvc.vistas.articulos.VtnRegistrarArticulo;
 import java.awt.Image;
@@ -17,6 +18,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     private VtnListarArticulos objVtnListarArticulos;
     private ServicioAlmacenamientoConferencias objServicio1;   
     private ServicioAlmacenamientoArticulos  objServicio2;
+    private ServicioAlmacenamientoRevisor  objServicio3;
         
     public VtnPrincipalAdmin() {
         initComponents();
@@ -26,10 +28,12 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     
     public void asociarServios(
             ServicioAlmacenamientoConferencias objServicio1,
-            ServicioAlmacenamientoArticulos objServicio2)
+            ServicioAlmacenamientoArticulos objServicio2,
+            ServicioAlmacenamientoRevisor  objServicio3)
     {
         this.objServicio1=objServicio1;
         this.objServicio2=objServicio2;
+        this.objServicio3=objServicio3;
         relacionarInternalFrameConJdesptokPane();
     }
     
@@ -44,7 +48,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         this.objVtnListarConferencias= new VtnListarConferencias(this.objServicio1);
         this.jDesktopPanelPrincipal.add(this.objVtnListarConferencias);
         
-        this.objVtnListarArticulos = new VtnListarArticulos(this.objServicio2, this.objServicio1);
+        this.objVtnListarArticulos = new VtnListarArticulos(this.objServicio2, this.objServicio1, this.objServicio3);
         this.jDesktopPanelPrincipal.add(this.objVtnListarArticulos);
     }
 
