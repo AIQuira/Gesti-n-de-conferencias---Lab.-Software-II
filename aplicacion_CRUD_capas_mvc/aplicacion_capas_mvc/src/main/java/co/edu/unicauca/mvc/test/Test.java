@@ -10,7 +10,6 @@ import co.edu.unicauca.mvc.modelos.Articulo;
 import co.edu.unicauca.mvc.modelos.Revisor;
 import co.edu.unicauca.mvc.modelos.EstadoRevision;
 import co.edu.unicauca.mvc.vistas.adminConferencia.VtnPrincipalAdmin;
-import co.edu.unicauca.mvc.vistas.articulos.RevisorVista;
 import co.edu.unicauca.mvc.vistas.asistente.VtnPrincipalAsistente;
 import co.edu.unicauca.mvc.vistas.autorPublicacion.VtnPrincipalAutor;
 import javax.swing.UIManager;
@@ -43,16 +42,16 @@ public class Test {
         ServicioAlmacenamientoRevisor objServicio3 =
                 new ServicioAlmacenamientoRevisor(objRepositorio3);
         
-        RevisorVista revisor1 = new RevisorVista("Revisor 1");
-        RevisorVista revisor2 = new RevisorVista("Revisor 2");
+        Revisor revisor1 = new Revisor(1,"Revisor 1","a 1");
+        Revisor revisor2 = new Revisor(2,"Revisor 2","b 2");
         objServicio2.addObserver(revisor1);
         objServicio2.addObserver(revisor2);
         Articulo articulo1 = new Articulo("Artículo 1", "w");
         Articulo articulo2 = new Articulo("Artículo 2", "s");
+        objServicio2.almacenarArticulo(articulo1);
         objServicio2.almacenarArticulo(articulo2);
-        objServicio2.almacenarArticulo(articulo2);
-        objServicio2.cambiarEstadoArticulo("Artículo 1", EstadoRevision.EN_REVISION);
-        objServicio2.cambiarEstadoArticulo("Artículo 2", EstadoRevision.REVISADO);
+        objServicio2.cambiarEstadoArticulo(1, EstadoRevision.EN_REVISION);
+        objServicio2.cambiarEstadoArticulo(2, EstadoRevision.EN_REVISION);
         
         VtnPrincipalAsistente objVtnAsistente=new VtnPrincipalAsistente();
         VtnPrincipalAutor objVtnAutor= new VtnPrincipalAutor();

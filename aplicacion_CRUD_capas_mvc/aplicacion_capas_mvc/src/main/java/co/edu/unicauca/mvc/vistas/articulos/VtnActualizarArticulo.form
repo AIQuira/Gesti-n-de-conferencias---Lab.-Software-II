@@ -250,8 +250,8 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="PENDIENTE"/>
-                <StringItem index="1" value="EN_REVISION,"/>
-                <StringItem index="2" value="REVISADO;"/>
+                <StringItem index="1" value="EN_REVISION"/>
+                <StringItem index="2" value="REVISADO"/>
               </StringArray>
             </Property>
           </Properties>

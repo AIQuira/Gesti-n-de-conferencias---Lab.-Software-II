@@ -41,13 +41,17 @@ public class ServicioAlmacenamientoArticulos extends Subject {
     }
 
     // Método para cambiar el estado de revisión del artículo
-    public void cambiarEstadoArticulo(String tituloArticulo, EstadoRevision nuevoEstado) {
-        for (Articulo articulo : listarArticulos()) {
-            if (articulo.getTitulo().equals(tituloArticulo)) {
-                articulo.setEstadoRevision(nuevoEstado);
-                notifyAllObserves(); // Notificar cuando cambie el estado
-                break;
-            }
+    public boolean cambiarEstadoArticulo(int idArticulo, EstadoRevision nuevoEstado) {
+        Articulo articulo = consultarArticulo(idArticulo);  // Consultar artículo por ID
+
+        if (articulo != null && articulo.cambiarEstado(nuevoEstado)) {
+            // Actualizar el estado en la base de datos o en la lógica de tu aplicación
+            referenciaRepositorioArticulo.actualizarArticulo(articulo);  // Persistir los cambios
+            notifyAllObserves();
+            return true;
+        } else {
+            System.out.println("No se pudo cambiar el estado del artículo.");
+            return false; // Si la transición no es válida
         }
     }
     

@@ -1,8 +1,10 @@
 package co.edu.unicauca.mvc.modelos;
 
+import co.edu.unicauca.mvc.infraestructura.Observer;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
-public class Revisor {
+public class Revisor implements Observer{
 
     private int idRevisor;
     private String nombres;
@@ -61,5 +63,11 @@ public class Revisor {
     public String toString(){
         return this.nombres + this.apellidos;
     }
-
+    
+    @Override
+    public void update(Object o) {
+        // Mostrar notificación en ventana emergente cuando se actualiza el estado del artículo
+        JOptionPane.showMessageDialog(null, "Notificación para " + nombres + ": El estado ha cambiado.", 
+                                      "Notificación de Cambio", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

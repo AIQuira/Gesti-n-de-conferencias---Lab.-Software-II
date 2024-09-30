@@ -7,6 +7,7 @@ package co.edu.unicauca.mvc.vistas.articulos;
 import co.edu.unicauca.microkernel.common.interfaces.ISendEmail;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoArticulos;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoConferencias;
+import co.edu.unicauca.mvc.infraestructura.Observer;
 import co.edu.unicauca.mvc.modelos.Articulo;
 import co.edu.unicauca.mvc.modelos.Conferencia;
 import co.edu.unicauca.mvc.modelos.EstadoRevision;
@@ -228,8 +229,6 @@ public class VtnRegistrarArticulo1 extends javax.swing.JFrame {
         objArticulo.setIdArticulo(1);
 
         bandera = this.objServicio1.almacenarArticulo(objArticulo);
-        RevisorVista revisor1 = new RevisorVista("Revisor 1");
-        objServicio1.addObserver(revisor1);
 
         objArticulo.setEstadoRevision(EstadoRevision.REVISADO);
         if (bandera == true) {

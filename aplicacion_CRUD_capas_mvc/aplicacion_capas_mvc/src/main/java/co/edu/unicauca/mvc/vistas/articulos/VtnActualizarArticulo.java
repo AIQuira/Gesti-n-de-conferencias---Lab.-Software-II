@@ -8,6 +8,7 @@ import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoArticulos;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoConferencias;
 import co.edu.unicauca.mvc.modelos.Articulo;
 import co.edu.unicauca.mvc.modelos.Conferencia;
+import co.edu.unicauca.mvc.modelos.EstadoRevision;
 import co.edu.unicauca.mvc.utilidades.Utilidades;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -138,7 +139,7 @@ public class VtnActualizarArticulo extends javax.swing.JFrame {
 
         jLabel5.setText("Id:");
 
-        jComboEstadoRevision.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "EN_REVISION,", "REVISADO;" }));
+        jComboEstadoRevision.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "EN_REVISION", "REVISADO" }));
 
         jLabel6.setText("Estado");
 
@@ -206,30 +207,58 @@ public class VtnActualizarArticulo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        String titulo, autores, id;
-        Conferencia objConferencia;
-        boolean bandera;
-        int idArticulo;
-        id=this.jTextFieldId.getText();  
-        
-        idArticulo=Integer.parseInt(id);
-        titulo=this.jTextFieldTitulo.getText();
-        autores=this.jTextAreaAutores.getText();
-        objConferencia=(Conferencia) this.jComboBoxConferencia.getSelectedItem();
-        
-        
-        Articulo objArticulo= new Articulo(titulo,autores);
-        objArticulo.setObjConferencia(objConferencia);
-        
-        bandera=this.objServicio1.actualizarArticulo(objArticulo);
-       if(bandera==true)
-       {
-           Utilidades.mensajeExito("Artículo actualizado exitosamente", "Artículo actualizado");
-       }
-       else
-       {
-           Utilidades.mensajeError("Error al actualizar el artículo", "Error al actualizar");
-       }
+         String titulo, autores, id, estado;
+    Conferencia objConferencia;
+    boolean bandera;
+    int idArticulo;
+
+    try {
+        // Obtener el ID del artículo y convertirlo a entero
+        id = this.jTextFieldId.getText();
+        idArticulo = Integer.parseInt(id);
+
+        // Obtener el título, autores y conferencia
+        titulo = this.jTextFieldTitulo.getText();
+        autores = this.jTextAreaAutores.getText();
+        objConferencia = (Conferencia) this.jComboBoxConferencia.getSelectedItem();
+
+        // Obtener el estado seleccionado en el JComboBox
+        estado = (String) jComboEstadoRevision.getSelectedItem();
+
+        // Consultar el artículo existente en lugar de crear uno nuevo
+        Articulo objArticulo = objServicio1.consultarArticulo(idArticulo);
+
+        // Verificar si el artículo existe
+        if (objArticulo != null) {
+            // Actualizar los datos del artículo
+            objArticulo.setTitulo(titulo);
+            objArticulo.setAutores(autores);
+            objArticulo.setObjConferencia(objConferencia);
+
+            // Intentar cambiar el estado del artículo usando la validación
+            boolean estadoCambiado = objServicio1.cambiarEstadoArticulo(idArticulo, EstadoRevision.valueOf(estado));
+
+            if (estadoCambiado) {
+                // Si la transición de estado es válida, actualizar el artículo en el sistema
+                bandera = this.objServicio1.actualizarArticulo(objArticulo);
+
+                if (bandera) {
+                    Utilidades.mensajeExito("Artículo actualizado exitosamente", "Artículo actualizado");
+                } else {
+                    Utilidades.mensajeError("Error al actualizar el artículo", "Error al actualizar");
+                }
+            } else {
+                Utilidades.mensajeError("Transición de estado no válida", "Error en el cambio de estado");
+            }
+        } else {
+            Utilidades.mensajeError("No se encontró el artículo con ID: " + idArticulo, "Error");
+        }
+
+    } catch (NumberFormatException e) {
+        Utilidades.mensajeError("ID de artículo inválido", "Error");
+    } catch (IllegalArgumentException e) {
+        Utilidades.mensajeError("Estado de revisión inválido: " , "Error");
+    }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     
