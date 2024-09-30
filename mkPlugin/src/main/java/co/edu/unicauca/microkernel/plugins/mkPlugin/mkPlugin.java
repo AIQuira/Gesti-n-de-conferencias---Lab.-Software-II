@@ -43,8 +43,8 @@ public class mkPlugin implements ISendEmail{
                 Message.RecipientType.TO,
                 InternetAddress.parse(addressee) // Destinatario
             );
-            message.setSubject("CONFIRMACION Y NOTIFICACION RECEPCION TRABAJO");
-            message.setText("El trabajo ha sido recibido de manera exitosa");
+            message.setSubject("Advertencia de Compilación: Se generó una advertencia sobre operaciones no verificadas en RepositorioArticuloMemoriaArrayList. Puedes recompilar con la opción -Xlint:unchecked para obtener más detalles sobre esta advertencia.");
+            message.setText("Compilación Exitosa: El proyecto aplicacion_capas_mvc se construyó correctamente y se generó el archivo JAR.");
 
             // Enviar el mensaje
             Transport.send(message);

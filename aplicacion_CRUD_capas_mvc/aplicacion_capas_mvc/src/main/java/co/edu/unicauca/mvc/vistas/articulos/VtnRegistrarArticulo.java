@@ -1,14 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package co.edu.unicauca.mvc.vistas.articulos;
 
+import co.edu.unicauca.microkernel.common.interfaces.ISendEmail;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoArticulos;
 import co.edu.unicauca.mvc.controladores.ServicioAlmacenamientoConferencias;
 import co.edu.unicauca.mvc.modelos.Articulo;
 import co.edu.unicauca.mvc.modelos.Conferencia;
 import co.edu.unicauca.mvc.modelos.EstadoRevision;
+import co.edu.unicauca.mvc.plugins.EmailSenderPluginManager;
 import co.edu.unicauca.mvc.utilidades.Utilidades;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -189,7 +188,7 @@ public class VtnRegistrarArticulo extends javax.swing.JInternalFrame {
                         .addComponent(jButtonRegistrar)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextAreaAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelAutores))
@@ -225,8 +224,25 @@ public class VtnRegistrarArticulo extends javax.swing.JInternalFrame {
         if(bandera==true)
         {
             Utilidades.mensajeExito("Registro exitoso", "Registro exitoso");
+            
+            try {
+            // Inicializar el EmailSenderPluginManager
+            String basePath = "src/main/resources/plugins/";// Especifica la ruta donde está tu archivo plugin.properties
+            EmailSenderPluginManager.init(basePath);
+
+            // Obtener el plugin para Hotmail (o el servicio de correo que estés usando)
+            ISendEmail emailPlugin = EmailSenderPluginManager.getInstance().getEmailPlugin("h");
+
+            if (emailPlugin != null) {
+                emailPlugin.sendEmail("thaliaepe@hotmail.com", "carolt12345","juanpabernal20011@hotmail.com");
+            } else {
+                System.out.println("No se encontró el plugin para el servicio de correo especificado.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else
+
+        } else
         {
             Utilidades.mensajeError("Articulo no almacenado","Error al almacenar el articulo");
         }

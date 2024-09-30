@@ -40,8 +40,7 @@ public class envioEmailTest {
         // Envía el correo real
         emailPlugin.sendEmail(to, subject, body);
         
-        // Puedes agregar una aserción aquí si quieres verificar algo,
-        // pero no podrás verificar que el correo se haya enviado sin mocks.
+        
         System.out.println("Correo enviado correctamente a " + to);
     }
 }

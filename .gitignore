@@ -24,3 +24,4 @@ hs_err_pid*
 replay_pid*
 /mkPlugin/target/
 /mkCommon/target/
+/aplicacion_CRUD_capas_mvc/aplicacion_capas_mvc/target/

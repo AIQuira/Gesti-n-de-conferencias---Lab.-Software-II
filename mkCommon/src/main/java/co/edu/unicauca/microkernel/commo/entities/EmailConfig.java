@@ -6,8 +6,8 @@ package co.edu.unicauca.microkernel.commo.entities;
  * @author thali
  */
 public class EmailConfig {
-    private String username = "pruebalina25@hotmail.com"; // Tu cuenta de Hotmail
-    private String password = "redire25"; // Tu contraseña de Hotmail
+    private String username = "thaliaepe@hotmail.com"; // cuenta de Hotmail
+    private String password = "carolt12345"; // contraseña de Hotmail
 
     public EmailConfig(String username, String password) {
         this.username = username;

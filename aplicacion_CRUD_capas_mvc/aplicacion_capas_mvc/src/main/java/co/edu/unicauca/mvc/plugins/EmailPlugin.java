@@ -20,8 +20,8 @@ public class EmailPlugin {
     }
     
     public static void sendEmail(String to, String subject, String body) {
-        final String username = "conferenciasunicauca@hotmail.com"; // Tu cuenta de Hotmail
-        final String password = "proyecto.software"; // Tu contraseña de Hotmail
+        final String username = "thaliaepe@hotmail.com"; // Tu cuenta de Hotmail
+        final String password = "carolt12345"; // Tu contraseña de Hotmail
         
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp-mail.outlook.com"); // Servidor SMTP de Hotmail
@@ -43,10 +43,10 @@ public class EmailPlugin {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(
                 Message.RecipientType.TO,
-                InternetAddress.parse("thaliaepe@hotmail.com") // Destinatario
+                InternetAddress.parse("juanpabernal20011@hotmail.com") // Destinatario
             );
-            message.setSubject("CONFIRMACION Y NOTIFICACION RECEPCION TRABAJO");
-            message.setText("El trabajo ha sido recibido de manera exitosa");
+            message.setSubject("Advertencia de Compilación: Se generó una advertencia sobre operaciones no verificadas en RepositorioArticuloMemoriaArrayList. Puedes recompilar con la opción -Xlint:unchecked para obtener más detalles sobre esta advertencia.");
+            message.setText("Compilación Exitosa: El proyecto aplicacion_capas_mvc se construyó correctamente y se generó el archivo JAR.");
 
             // Enviar el mensaje
             Transport.send(message);
